@@ -292,6 +292,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `username` _{string}_ - The user's username
 - `password` _{string}_ - The user's password
+- `bio` *{string}* - The user's bio
 
 **Returns**
 
@@ -312,4 +313,134 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
+- `403` if the user is not logged in
+
+#### `POST /api/follow/:userId?` - Follow a user
+
+**Returns**
+
+- A success message
+
+**Throws**
+- `403` if the user is not logged in
+- `403` if the user is already following the user indicated by userId
+- `404` if the userId is invalid
+
+#### `DELETE /api/follow/:userId?` - Unfollow a user
+
+**Returns**
+
+- A success message
+
+**Throws**
+- `403` if the user is not logged in
+- `403` if the user is not following the user indicated by userId
+- `404` if the userId is invalid
+
+#### `GET /api/follow/following/:userId?` - Get users that user is following
+
+**Returns**
+
+- An array of users that the user indicated by userId is following
+
+**Throws**
+
+- `404` if the userId is invalid
+
+#### `GET /api/follow/followers/:userId?` - Get followers of user
+
+**Returns**
+
+- An array of users who follow user indicated by userId
+
+**Throws**
+
+- `404` if the userId is invalid
+
+#### `PUT /api/interest/:freetId?` - Indicate interest/disinterest in a freet
+
+**Body**
+- `interest` *{boolean}* - Whether the user is interested in the freet
+
+**Returns**
+
+- A success message
+
+**Throws**
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
+
+#### `DELETE /api/interest/:freetId?` - Revoke indication of interest/disinterest in a freet
+
+**Returns**
+
+- A success message
+
+**Throws**
+- `403` if the user is not logged in
+- `403` if the user is has not indicated interest/disinterest in the freet indicated by freetId
+- `404` if the freetId is invalid
+
+#### `GET /api/interest/:userId?` - Get freets user is interested/disinterested in
+
+**Returns**
+
+- An array of freets that the user indicated by userId has indicated interest in
+- An array of freets that the user indicated by userId has indicated disinterest in
+
+**Throws**
+
+- `404` if the userId is invalid
+
+#### `PUT /api/vote/:freetId?` - Upvote/downvote a freet
+
+**Body**
+- `upvote` *{boolean}* - Whether the user is upvoting the freet
+
+**Returns**
+
+- A success message
+
+**Throws**
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
+
+#### `DELETE /api/vote/:freetId?` - Revoke upvote/downvote of a freet
+
+**Returns**
+
+- A success message
+
+**Throws**
+- `403` if the user is not logged in
+- `403` if the user is has not upvoted/downvoted the freet indicated by freetId
+- `404` if the freetId is invalid
+
+#### `GET /api/vote/:userId?` - Get freets user has upvoted/downvoted
+
+**Returns**
+
+- An array of freets that the user indicated by userId has upvoted
+- An array of freets that the user indicated by userId has downvoted
+
+**Throws**
+
+- `404` if the userId is invalid
+
+#### `GET /api/chronological` - Get the freets of the user's chronological feed
+
+**Returns**
+
+- An array of all freets posted by users followed by the user, sorted in descending order by time posted
+
+**Throws**
+- `403` if the user is not logged in
+
+#### `GET /api/recommended` - Get the freets of the user's recommended feed
+
+**Returns**
+
+- An array of freets recommended for the user, sorted using a combination of who the user is following, what freets they have indicated interest in, what freets other users have upvoted, and how recently the freets were posted
+
+**Throws**
 - `403` if the user is not logged in
