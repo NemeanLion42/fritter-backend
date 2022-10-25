@@ -3,6 +3,7 @@ import express from 'express';
 import FreetCollection from '../freet/collection';
 import UserCollection from './collection';
 import * as userValidator from '../user/middleware';
+import * as followValidator from '../follow/middleware';
 import * as util from './util';
 import FollowCollection from './collection';
 import { Types } from 'mongoose';
@@ -21,7 +22,12 @@ const router = express.Router();
  */
 router.post(
   '/:userId?',
-  [userValidator.isUserLoggedIn],
+  [
+    userValidator.isUserLoggedIn,
+    userValidator.isUserExists,
+    userValidator.isUserNotCurrentUser,
+    followValidator.isCurrentUserNotFollowingUser
+  ],
   async (req: Request, res: Response) => {
     const followerId = (req.session.userId) ?? '';
     const success = await FollowCollection.addFollower(followerId, (req.params.userId as unknown as Types.ObjectId));
@@ -32,7 +38,7 @@ router.post(
     } else {
       res.status(403).json({
         message: 'Follow failed'
-      })
+      });
     }
   }
 );
@@ -49,7 +55,11 @@ router.post(
  */
  router.delete(
   '/:userId?',
-  [userValidator.isUserLoggedIn],
+  [
+    userValidator.isUserLoggedIn,
+    userValidator.isUserExists,
+    followValidator.isCurrentUserFollowingUser
+  ],
   async (req: Request, res: Response) => {
     const followerId = (req.session.userId) ?? '';
     const success = await FollowCollection.removeFollower(followerId, (req.params.userId as unknown as Types.ObjectId));
@@ -75,7 +85,9 @@ router.post(
  */
  router.get(
   '/following/:userId?',
-  [],
+  [
+    userValidator.isUserExists
+  ],
   async (req: Request, res: Response) => {
     const following = await (await FollowCollection.findOneByUserId((req.params.userId as unknown as Types.ObjectId))).following;
     res.status(200).json(following);
@@ -92,7 +104,9 @@ router.post(
  */
  router.get(
   '/followers/:userId?',
-  [],
+  [
+    userValidator.isUserExists
+  ],
   async (req: Request, res: Response) => {
     const followers = await (await FollowCollection.findOneByUserId((req.params.userId as unknown as Types.ObjectId))).followers;
     res.status(200).json(followers);

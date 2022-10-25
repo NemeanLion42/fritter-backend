@@ -341,7 +341,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Returns**
 
-- A set of users that the user indicated by userId is following
+- An array of users that the user indicated by userId is following
 
 **Throws**
 
@@ -351,7 +351,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Returns**
 
-- A set of users who follow user indicated by userId
+- An array of users who follow user indicated by userId
 
 **Throws**
 
@@ -385,8 +385,8 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Returns**
 
-- A set of freets that the user indicated by userId has indicated interest in
-- A set of freets that the user indicated by userId has indicated disinterest in
+- An array of freets that the user indicated by userId has indicated interest in
+- An array of freets that the user indicated by userId has indicated disinterest in
 
 **Throws**
 
@@ -396,8 +396,8 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Returns**
 
-- A set of users that have indicated interest in the freet indicated by freetId
-- A set of users that have indicated disinterest in the freet indicated by freetId
+- An array of users that have indicated interest in the freet indicated by freetId
+- An array of users that have indicated disinterest in the freet indicated by freetId
 
 **Throws**
 
@@ -431,8 +431,8 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Returns**
 
-- A set of freets that the user indicated by userId has upvoted
-- A set of freets that the user indicated by userId has downvoted
+- An array of freets that the user indicated by userId has upvoted
+- An array of freets that the user indicated by userId has downvoted
 
 **Throws**
 
@@ -442,8 +442,8 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Returns**
 
-- A set of users who upvoted the freet indicated by freetId
-- A set of users who downvoted the freet indicated by freetId
+- An array of users who upvoted the freet indicated by freetId
+- An array of users who downvoted the freet indicated by freetId
 
 **Throws**
 

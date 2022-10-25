@@ -4,6 +4,7 @@ import FreetCollection from '../freet/collection';
 import UserCollection from './collection';
 import * as userValidator from '../user/middleware';
 import * as util from './util';
+import FollowCollection from '../follow/collection';
 
 const router = express.Router();
 
@@ -87,6 +88,7 @@ router.post(
   async (req: Request, res: Response) => {
     const user = await UserCollection.addOne(req.body.username, req.body.password);
     req.session.userId = user._id.toString();
+    FollowCollection.addOne(user._id);
     res.status(201).json({
       message: `Your account was created successfully. You have been logged in as ${user.username}`,
       user: util.constructUserResponse(user)
@@ -139,6 +141,7 @@ router.delete(
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
+    await FollowCollection.removeAllReferences(userId);
     await UserCollection.deleteOne(userId);
     await FreetCollection.deleteMany(userId);
     req.session.userId = undefined;

@@ -6,8 +6,8 @@ import {Schema, model} from 'mongoose';
 export type Follow = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   userId: Types.ObjectId;
-  following: Set<Types.ObjectId>;
-  followers: Set<Types.ObjectId>;
+  following: Array<Types.ObjectId>;
+  followers: Array<Types.ObjectId>;
 };
 
 // Mongoose schema definition for interfacing with a MongoDB table
@@ -17,11 +17,11 @@ const FollowSchema = new Schema({
     required: true
   },
   following: {
-    type: Set<Schema.Types.ObjectId>,
+    type: [Schema.Types.ObjectId],
     required: true
   },
   followers: {
-    type: Set<Schema.Types.ObjectId>,
+    type: [Schema.Types.ObjectId],
     required: true
   }
 });
