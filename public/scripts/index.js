@@ -42,7 +42,12 @@ const formsAndHandlers = {
   'follow-user': followUser,
   'unfollow-user': unfollowUser,
   'get-following': getFollowing,
-  'get-followers': getFollowers
+  'get-followers': getFollowers,
+  'indicate-interested': indicateInterested,
+  'indicate-not-interested': indicateNotInterested,
+  'remove-interest-indication': removeInterestIndication,
+  'get-freet-interest-by-user': getFreetInterestByUser,
+  'get-user-interest-by-freet': getUserInterestByFreet
 };
 
 // Attach handlers to forms
