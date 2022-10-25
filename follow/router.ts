@@ -9,7 +9,16 @@ import { Types } from 'mongoose';
 
 const router = express.Router();
 
-
+/**
+ * Follow a user.
+ *
+ * @name POST /api/follow/:userId
+ *
+ * @return {string} - A success message
+ * @throws {403} - If the user is not logged in
+ * @throws {403} - If the user is already following the user indicated by userId
+ * @throws {404} - If the userId is invalid
+ */
 router.post(
   '/:userId?',
   [userValidator.isUserLoggedIn],
@@ -28,7 +37,17 @@ router.post(
   }
 );
 
-router.delete(
+/**
+ * Unfollow a user.
+ *
+ * @name DELETE /api/follow/:userId
+ *
+ * @return {string} - A success message
+ * @throws {403} - If the user is not logged in
+ * @throws {403} - If the user is not following the user indicated by userId
+ * @throws {404} - If the userId is invalid
+ */
+ router.delete(
   '/:userId?',
   [userValidator.isUserLoggedIn],
   async (req: Request, res: Response) => {
@@ -46,7 +65,15 @@ router.delete(
   }
 );
 
-router.get(
+/**
+ * Get users that user is following
+ *
+ * @name GET /api/follow/following/:userId
+ *
+ * @return {Set<Types.ObjectId>} - A set of users that the user indicated by userId is following
+ * @throws {404} - If the userId is invalid
+ */
+ router.get(
   '/following/:userId?',
   [],
   async (req: Request, res: Response) => {
@@ -55,7 +82,15 @@ router.get(
   }
 );
 
-router.get(
+/**
+ * Get followers of user
+ *
+ * @name GET /api/follow/followers/:userId
+ *
+ * @return {Set<Types.ObjectId>} - A set of users who follow user indicated by userId
+ * @throws {404} - If the userId is invalid
+ */
+ router.get(
   '/followers/:userId?',
   [],
   async (req: Request, res: Response) => {
