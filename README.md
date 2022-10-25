@@ -341,7 +341,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Returns**
 
-- An array of users that the user indicated by userId is following
+- A set of users that the user indicated by userId is following
 
 **Throws**
 
@@ -351,7 +351,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Returns**
 
-- An array of users who follow user indicated by userId
+- A set of users who follow user indicated by userId
 
 **Throws**
 
@@ -385,12 +385,23 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Returns**
 
-- An array of freets that the user indicated by userId has indicated interest in
-- An array of freets that the user indicated by userId has indicated disinterest in
+- A set of freets that the user indicated by userId has indicated interest in
+- A set of freets that the user indicated by userId has indicated disinterest in
 
 **Throws**
 
 - `404` if the userId is invalid
+
+#### `GET /api/interest/:freetId?` - Get users interested/disinterested in a freet
+
+**Returns**
+
+- A set of users that have indicated interest in the freet indicated by freetId
+- A set of users that have indicated disinterest in the freet indicated by freetId
+
+**Throws**
+
+- `404` if the freetId is invalid
 
 #### `PUT /api/vote/:freetId?` - Upvote/downvote a freet
 
@@ -420,8 +431,19 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Returns**
 
-- An array of freets that the user indicated by userId has upvoted
-- An array of freets that the user indicated by userId has downvoted
+- A set of freets that the user indicated by userId has upvoted
+- A set of freets that the user indicated by userId has downvoted
+
+**Throws**
+
+- `404` if the userId is invalid
+
+#### `GET /api/vote/:freetId?` - Get users who upvoted/downvoted a freet
+
+**Returns**
+
+- A set of users who upvoted the freet indicated by freetId
+- A set of users who downvoted the freet indicated by freetId
 
 **Throws**
 
