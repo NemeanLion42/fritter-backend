@@ -385,7 +385,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 - `403` if the user is not logged in
-- `403` if the user is has not indicated interest/disinterest in the freet indicated by freetId
+- `403` if the user has not indicated interest/disinterest in the freet indicated by freetId
 - `404` if the freetId is invalid
 
 #### `GET /api/interest/user/:userId?` - Get freets user is interested/disinterested in
@@ -410,10 +410,17 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `404` if the freetId is invalid
 
-#### `PUT /api/vote/:freetId?` - Upvote/downvote a freet
+#### `PUT /api/vote/:freetId?/upvote` - Upvote a freet
 
-**Body**
-- `upvote` *{boolean}* - Whether the user is upvoting the freet
+**Returns**
+
+- A success message
+
+**Throws**
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
+
+#### `PUT /api/vote/:freetId?/downvote` - Downvote a freet
 
 **Returns**
 
@@ -431,7 +438,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 - `403` if the user is not logged in
-- `403` if the user is has not upvoted/downvoted the freet indicated by freetId
+- `403` if the user has not upvoted/downvoted the freet indicated by freetId
 - `404` if the freetId is invalid
 
 #### `GET /api/vote/user/:userId?` - Get freets user has upvoted/downvoted

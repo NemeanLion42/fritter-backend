@@ -22,7 +22,7 @@ class InterestCollection {
    * @param {Types.ObjectId | string} userId - The userId of the Interest to create/update
    * @param {Types.ObjectId | string} freetId - The freetId of the Interest to create/update
    * @param {boolean} interested - Whether the user is interested in the freet
-   * @returns 
+   * @returns {Promise<boolean>} - Whether the Interest was successfully created/updated
    */
   static async putOne(userId: Types.ObjectId | string, freetId: Types.ObjectId | string, interested: boolean): Promise<boolean> {
     var interest = await this.findOne(userId, freetId);

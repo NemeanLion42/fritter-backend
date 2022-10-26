@@ -47,7 +47,12 @@ const formsAndHandlers = {
   'indicate-not-interested': indicateNotInterested,
   'remove-interest-indication': removeInterestIndication,
   'get-freet-interest-by-user': getFreetInterestByUser,
-  'get-user-interest-by-freet': getUserInterestByFreet
+  'get-user-interest-by-freet': getUserInterestByFreet,
+  'upvote': upvote,
+  'downvote': downvote,
+  'remove-vote': removeVote,
+  'get-freet-votes-by-user': getFreetVotesByUser,
+  'get-user-votes-by-freet': getUserVotesByFreet
 };
 
 // Attach handlers to forms
