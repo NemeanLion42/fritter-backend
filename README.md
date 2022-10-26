@@ -292,7 +292,6 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `username` _{string}_ - The user's username
 - `password` _{string}_ - The user's password
-- `bio` *{string}* - The user's bio
 
 **Returns**
 
@@ -472,7 +471,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 - `403` if the user is not logged in
 
-#### `GET /api/recommended` - Get the freets of the user's recommended feed
+#### `GET /api/recommendations/feed` - Get the freets of the user's recommended feed
 
 **Returns**
 
