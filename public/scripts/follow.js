@@ -1,3 +1,9 @@
+function viewFollowingFeed(fields) {
+  fetch(`/api/follow/feed`, {method: 'GET'})
+    .then(showResponse)
+    .catch(showResponse);
+}
+
 function followUser(fields) {
   fetch(`/api/follow/${fields.id}`, {method: 'POST'})
     .then(showResponse)

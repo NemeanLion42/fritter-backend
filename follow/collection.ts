@@ -1,4 +1,5 @@
-import FreetModel from 'freet/model';
+import FreetCollection from '../freet/collection';
+import FreetModel, { Freet } from '../freet/model';
 import {HydratedDocument, Types} from 'mongoose';
 import type {Follow} from './model';
 import FollowModel from './model';
@@ -94,6 +95,17 @@ class FollowCollection {
     const deleteResult = await FollowModel.deleteOne({userId: userId});
     if (deleteResult.deletedCount !== 1) success = false;
     return success;
+  }
+
+  /**
+   * Get the freets in a user's following feed
+   * 
+   * @param userId - The id of the user to get the following feed for
+   * @returns {Promise<HydratedDocument<Freet>[]>} - An array of freets in the user's following feed
+   */
+  static async getFollowingFeed(userId: Types.ObjectId | string): Promise<Array<HydratedDocument<Freet>>> {
+    const following = (await FollowModel.findOne({userId: userId})).following;
+    return FreetModel.find({authorId: {$in: following}}).sort({dateCreated: -1}).populate('authorId');
   }
 }
 

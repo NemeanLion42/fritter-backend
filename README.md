@@ -463,7 +463,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `404` if the userId is invalid
 
-#### `GET /api/chronological` - Get the freets of the user's chronological feed
+#### `GET /api/follow/feed` - Get the freets of the user's following feed
 
 **Returns**
 

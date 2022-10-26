@@ -5,6 +5,7 @@ import UserCollection from './collection';
 import * as userValidator from '../user/middleware';
 import * as followValidator from '../follow/middleware';
 import * as util from './util';
+import * as freetUtil from '../freet/util';
 import FollowCollection from './collection';
 import { Types } from 'mongoose';
 
@@ -110,6 +111,26 @@ router.post(
   async (req: Request, res: Response) => {
     const followers = await (await FollowCollection.findOneByUserId((req.params.userId as unknown as Types.ObjectId))).followers;
     res.status(200).json(followers);
+  }
+);
+
+/**
+ * Get the freets of the user's following feed
+ * 
+ * @name GET /api/follow/feed
+ * 
+ * @return {FreetResponse[]} - An array of all freets posted by users followed by the user, sorted in descending order by time posted
+ * @throws {403} - If the user is not logged in
+ */
+router.get(
+  '/feed',
+  [
+    userValidator.isUserLoggedIn
+  ],
+  async (req: Request, res: Response) => {
+    const freets = await FollowCollection.getFollowingFeed(req.session.userId);
+    const response = freets.map(freetUtil.constructFreetResponse);
+    res.status(200).json(response);
   }
 );
 
